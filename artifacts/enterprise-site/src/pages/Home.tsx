@@ -88,7 +88,7 @@ export default function Home() {
               <span className="text-sm font-medium tracking-wide">Enterprise Software Solutions</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-heading font-extrabold tracking-tight mb-6 leading-[1.1]">
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
               Building Reliable Software Solutions for Modern Businesses
             </h1>
 
