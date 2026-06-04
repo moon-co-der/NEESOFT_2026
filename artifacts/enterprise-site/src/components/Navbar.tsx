@@ -8,11 +8,15 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const isHome = location === "/";
+  const isTransparent = isHome && !isScrolled;
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -27,13 +31,13 @@ export function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md py-4" : "bg-transparent py-6"
+        isTransparent ? "bg-transparent py-6" : "bg-white shadow-md py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2">
-          <Box className={`w-6 h-6 ${isScrolled ? "text-primary" : "text-primary md:text-white"}`} />
-          <span className={`font-heading font-bold text-2xl tracking-tight ${isScrolled ? "text-primary" : "text-primary md:text-white"}`}>
+          <Box className={`w-6 h-6 ${isTransparent ? "text-white" : "text-primary"}`} />
+          <span className={`font-heading font-bold text-2xl tracking-tight ${isTransparent ? "text-white" : "text-primary"}`}>
             NeeSoft
           </span>
         </Link>
@@ -44,12 +48,10 @@ export function Navbar() {
             <Link
               key={link.path}
               href={link.path}
-              className={`text-sm font-medium transition-colors hover:text-blue-500 ${
-                location === link.path 
-                  ? "text-blue-500" 
-                  : isScrolled 
-                    ? "text-foreground" 
-                    : "text-white"
+              className={`text-sm font-medium transition-colors hover:text-blue-400 ${
+                location === link.path
+                  ? isTransparent ? "text-blue-300" : "text-blue-600"
+                  : isTransparent ? "text-white/90" : "text-foreground"
               }`}
             >
               {link.name}
@@ -69,9 +71,9 @@ export function Navbar() {
           data-testid="mobile-menu-btn"
         >
           {isMobileMenuOpen ? (
-            <X className={isScrolled ? "text-primary" : "text-primary"} />
+            <X className={isTransparent ? "text-white" : "text-primary"} />
           ) : (
-            <Menu className={isScrolled ? "text-primary" : "text-primary md:text-white"} />
+            <Menu className={isTransparent ? "text-white" : "text-primary"} />
           )}
         </button>
       </div>
