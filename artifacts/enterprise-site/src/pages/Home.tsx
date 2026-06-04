@@ -67,7 +67,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden bg-[#103152] text-white">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#103152]/90 via-[#103152]/75 to-[#1a4a7a]/80 z-10" />
+          <div className="absolute inset-0 bg-[#103152]/75 mix-blend-multiply z-10" />
           <img
             src="/hero.png"
             alt="Enterprise Technology"
@@ -83,14 +83,13 @@ export default function Home() {
             variants={fadeUpVariant}
             className="max-w-3xl"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-400/20 border border-sky-400/40 backdrop-blur-md mb-8">
-              <span className="flex h-2 w-2 rounded-full bg-sky-400 animate-pulse" />
-              <span className="text-sm font-medium tracking-wide text-sky-200">Enterprise Software Solutions</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-8">
+              <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
+              <span className="text-sm font-medium tracking-wide">Enterprise Software Solutions</span>
             </div>
 
             <h1 className="text-5xl md:text-7xl font-heading font-extrabold tracking-tight mb-6 leading-[1.1]">
-              Building Reliable Software Solutions for{" "}
-              <span className="text-sky-400">Modern Businesses</span>
+              Building Reliable Software Solutions for Modern Businesses
             </h1>
 
             <p className="text-xl md:text-2xl text-white/80 mb-10 font-light leading-relaxed">
@@ -99,8 +98,8 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link href="/contact" data-testid="hero-btn-contact">
-                <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-sky-500 hover:bg-sky-400 text-white transition-transform hover:scale-105 shadow-lg shadow-sky-500/30">
-                  Get In Touch <ArrowRight className="ml-2 w-5 h-5" />
+                <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-[#103152] hover:bg-[#103152]/90 text-white transition-transform hover:scale-105 border border-white/20">
+                  Get In Touch
                 </Button>
               </Link>
               <Link href="/services" data-testid="hero-btn-services">
@@ -110,23 +109,6 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
-        </div>
-
-        {/* Floating stat badges */}
-        <div className="absolute bottom-12 right-8 z-20 hidden lg:flex flex-col gap-3">
-          {[
-            { value: "15+", label: "Years", color: "bg-sky-500" },
-            { value: "100+", label: "Projects", color: "bg-emerald-500" },
-            { value: "98%", label: "Satisfaction", color: "bg-violet-500" }
-          ].map((s) => (
-            <div key={s.label} className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3">
-              <div className={`w-2 h-8 rounded-full ${s.color}`} />
-              <div>
-                <div className="text-xl font-bold text-white">{s.value}</div>
-                <div className="text-xs text-white/60 uppercase tracking-wide">{s.label}</div>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
