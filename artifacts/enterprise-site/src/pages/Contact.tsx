@@ -14,7 +14,7 @@ const ADDRESS_LINE1 = "Third Floor, No:3, Velachery Bypass Rd,";
 const ADDRESS_LINE2 = "Shashi Nagar, Velachery,";
 const ADDRESS_LINE3 = "Chennai, Tamil Nadu 600042";
 const MAPS_EMBED =
-  "https://maps.google.com/maps?q=No+3+Velachery+Bypass+Road+Shashi+Nagar+Velachery+Chennai+Tamil+Nadu+600042&output=embed&z=15";
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3887.411651817478!2d80.2210829!3d12.9844427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d907b12735b%3A0x1966c9468e235573!2sNeesoft!5e0!3m2!1sen!2sin!4v1717567000000!5m2!1sen!2sin";
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -253,7 +253,7 @@ export default function Contact() {
               {ADDRESS_LINE1} {ADDRESS_LINE2} {ADDRESS_LINE3}
             </p>
             <a
-              href="https://maps.google.com/?q=No+3+Velachery+Bypass+Road+Shashi+Nagar+Velachery+Chennai+Tamil+Nadu+600042"
+              href="https://www.google.com/maps/place/Neesoft/@12.9844427,80.2052472,15z/data=!4m10!1m2!2m1!1sThird+Floor,+No:3,+Velachery+Bypass+Rd,+Shashi+Nagar,+Velachery,+Chennai,+Tamil+Nadu+600042!3m6!1s0x3a525d907b12735b:0x1966c9468e235573!8m2!3d12.9844427!4d80.2232716!15sCltUaGlyZCBGbG9vciwgTm86MywgVmVsYWNoZXJ5IEJ5cGFzcyBSZCwgU2hhc2hpIE5hZ2FyLCBWZWxhY2hlcnksIENoZW5uYWksIFRhbWlsIE5hZHUgNjAwMDQykgEQc29mdHdhcmVfY29tcGFueeABAA!16s%2Fg%2F11j8l67y3_?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-auto text-xs font-medium text-[#103152] hover:underline whitespace-nowrap"

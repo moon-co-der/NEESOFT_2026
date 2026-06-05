@@ -55,11 +55,16 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-2.5 text-white/65">
               <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-              <span className="leading-relaxed">
+              <a
+                href="https://www.google.com/maps/place/Neesoft/@12.9844427,80.2052472,15z/data=!4m10!1m2!2m1!1sThird+Floor,+No:3,+Velachery+Bypass+Rd,+Shashi+Nagar,+Velachery,+Chennai,+Tamil+Nadu+600042!3m6!1s0x3a525d907b12735b:0x1966c9468e235573!8m2!3d12.9844427!4d80.2232716!15sCltUaGlyZCBGbG9vciwgTm86MywgVmVsYWNoZXJ5IEJ5cGFzcyBSZCwgU2hhc2hpIE5hZ2FyLCBWZWxhY2hlcnksIENoZW5uYWksIFRhbWlsIE5hZHUgNjAwMDQykgEQc29mdHdhcmVfY29tcGFueeABAA!16s%2Fg%2F11j8l67y3_?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors leading-relaxed"
+              >
                 Third Floor, No:3, Velachery Bypass Rd,<br />
                 Shashi Nagar, Velachery,<br />
                 Chennai, Tamil Nadu 600042
-              </span>
+              </a>
             </li>
           </ul>
         </div>
