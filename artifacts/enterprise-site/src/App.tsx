@@ -10,6 +10,7 @@ import Clients from "@/pages/Clients";
 import Contact from "@/pages/Contact";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ function App() {
       <TooltipProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <div className="flex flex-col min-h-[100dvh]">
+            <ScrollToTop />
             <Navbar />
             <main className="flex-1">
               <Router />
