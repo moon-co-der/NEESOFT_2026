@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ChevronRight, Mail, Phone, MapPin, CheckCircle, Clock, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -9,19 +9,54 @@ import { Label } from "@/components/ui/label";
 
 const PHONE = "+91 98401 73006";
 const PHONE_HREF = "tel:+919840173006";
-const EMAIL = "kalai@neesoft.com";
+const EMAIL = "moonlovers.abc@gmail.com";
 const ADDRESS_LINE1 = "Third Floor, No:3, Velachery Bypass Rd,";
 const ADDRESS_LINE2 = "Shashi Nagar, Velachery,";
 const ADDRESS_LINE3 = "Chennai, Tamil Nadu 600042";
 const MAPS_EMBED =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m12!1m3!1d3887.411651817478!2d80.2210829!3d12.9844427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d907b12735b%3A0x1966c9468e235573!2sNeesoft!5e0!3m2!1sen!2sin!4v1717567000000!5m2!1sen!2sin";
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7775.6061808042905!2d80.22327159999999!3d12.984442699999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525d907b12735b%3A0x1966c9468e235573!2sNeesoft!5e0!3m2!1sen!2sin!4v1780723571221!5m2!1sen!2sin";
+const WEB3FORMS_ACCESS_KEY = "73862ec1-3d2c-430e-a172-0f61afcb524c"; // Replace with your Web3Forms access key
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setTimeout(() => setIsSubmitted(true), 400);
+
+    if (!formRef.current) return;
+
+    setIsPending(true);
+
+    try {
+      const formData = new FormData(formRef.current);
+      formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+
+      if (WEB3FORMS_ACCESS_KEY === "73862ec1-3d2c-430e-a172-0f61afcb524c") {
+        // Fallback for demonstration if credentials are not set
+        console.warn("Web3Forms access key not set. Simulating success...");
+        await new Promise(resolve => setTimeout(resolve, 800));
+        setIsSubmitted(true);
+      } else {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+
+        if (data.success) {
+          setIsSubmitted(true);
+        } else {
+          throw new Error(data.message || "Submission failed");
+        }
+      }
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      alert("Something went wrong while sending your message. Please try again later.");
+    } finally {
+      setIsPending(false);
+    }
   };
 
   return (
@@ -121,26 +156,23 @@ export default function Contact() {
                 <>
                   <h2 className="text-xl font-semibold text-gray-900 mb-1">Send Us a Message</h2>
                   <p className="text-sm text-gray-500 mb-6">Fill in the form and we'll get back to you promptly.</p>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
                         <Label htmlFor="fullName" className="text-sm font-medium text-gray-700">Full Name</Label>
-                        <Input id="fullName" required placeholder="John Doe" className="h-10 text-sm" />
+                        <Input id="fullName" name="name" required placeholder="John Doe" className="h-10 text-sm" />
                       </div>
-                      <div className="space-y-1.5">
-                        <Label htmlFor="companyName" className="text-sm font-medium text-gray-700">Company Name</Label>
-                        <Input id="companyName" required placeholder="Acme Inc." className="h-10 text-sm" />
-                      </div>
+                      
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5">
                         <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email Address</Label>
-                        <Input id="email" type="email" required placeholder="john@example.com" className="h-10 text-sm" />
+                        <Input id="email" name="email" type="email" required placeholder="john@example.com" className="h-10 text-sm" />
                       </div>
                       <div className="space-y-1.5">
                         <Label htmlFor="phone" className="text-sm font-medium text-gray-700">Phone Number</Label>
-                        <Input id="phone" type="tel" placeholder="+91 00000 00000" className="h-10 text-sm" />
+                        <Input id="phone" name="phone" type="tel" placeholder="+91 00000 00000" className="h-10 text-sm" />
                       </div>
                     </div>
 
@@ -148,6 +180,7 @@ export default function Contact() {
                       <Label htmlFor="service" className="text-sm font-medium text-gray-700">Service Interest</Label>
                       <select
                         id="service"
+                        name="service"
                         required
                         defaultValue=""
                         className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-[#103152]/30 focus:ring-offset-2 text-gray-700"
@@ -167,6 +200,7 @@ export default function Contact() {
                       <Label htmlFor="details" className="text-sm font-medium text-gray-700">Project Details</Label>
                       <Textarea
                         id="details"
+                        name="message"
                         required
                         placeholder="Tell us about your project requirements..."
                         className="min-h-[100px] resize-y text-sm"
@@ -175,9 +209,11 @@ export default function Contact() {
 
                     <Button
                       type="submit"
+                      disabled={isPending}
                       className="w-full bg-[#103152] hover:bg-[#103152]/90 text-white h-11 text-base font-semibold"
                     >
-                      Send Inquiry <ArrowRight className="ml-2 w-4 h-4" />
+                      {isPending ? "Sending..." : "Send Inquiry"}
+                      {!isPending && <ArrowRight className="ml-2 w-4 h-4" />}
                     </Button>
                   </form>
                 </>

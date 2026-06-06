@@ -7,7 +7,7 @@ import { AnimatedCounter } from "@/components/AnimatedCounter";
 export default function Home() {
   const fadeUpVariant = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.215, 0.61, 0.355, 1] as const } } // easeOutCubic
   };
 
   const staggerContainer = {
